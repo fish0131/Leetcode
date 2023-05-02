@@ -3,7 +3,7 @@ public:
     bool isNumber(string s) {
         bool num = false, numAfterE = true, dot = false, exp = false, sign = false;
         int n = s.size();
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; i++) {
             if (s[i] == ' ') {
                 if (i < n - 1 && s[i + 1] != ' ' && (num || dot || exp || sign)) return false;
             } else if (s[i] == '+' || s[i] == '-') {
@@ -13,7 +13,7 @@ public:
                 num = true;
                 numAfterE = true;
             } else if (s[i] == '.') {
-                if (dot || exp) return false;  // reject double "." or double "e" or double "E"  ex: "12.3.4" and "1e-07e" are not valid numbers
+                if (dot || exp) return false;  // reject double "." or "e." or "E."  ex: "12.3.4" and "1e7.5" are not valid numbers
                 dot = true;
             } else if (s[i] == 'e' || s[i] == 'E') {  
                 if (exp || !num) return false;
