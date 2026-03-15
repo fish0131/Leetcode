@@ -11,23 +11,16 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        vector<ListNode*> nodes;
-        if (!head) return nullptr;
-        while(head) {
-            nodes.push_back(head);
-            head = head->next;
-        }
-        reverse(nodes.begin(), nodes.end());
-        
-        // 重新串接
-        for (int i = 0; i < nodes.size() - 1; i++) {
-            nodes[i]->next = nodes[i + 1];
-        }
+        ListNode* prev = nullptr;
+        ListNode* curr = head;
 
-        // 最後一個節點 next = nullptr
-        nodes.back()->next = nullptr;
+        while(curr) {
+            ListNode* next = curr->next;
+            curr->next = prev;
 
-        // 回傳新的頭節點
-        return nodes[0];
+            prev = curr;
+            curr = next;
+        }
+        return prev;
     }
 };
